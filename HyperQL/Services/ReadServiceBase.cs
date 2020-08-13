@@ -113,9 +113,9 @@ namespace HyperQL
         {
             Query = Query
                 .Where(x => (searchRequest != null && searchRequest.IsDeleted == null) || !x.IsDeleted)
-                .WhereBySearchRequest(searchRequest)
-                .IncludeBySearchRequest(searchRequest)
-                .OrderByExtension(searchRequest?.Pagination?.OrderFields);
+                .Where(searchRequest)
+                .Include(searchRequest)
+                .OrderBy(searchRequest?.Pagination?.OrderFields);
 
             if (searchRequest?.Pagination != null)
             {

@@ -9,20 +9,20 @@ namespace HyperQL
 {
     public static class Extensions
     {
-        public static IQueryable<T> WhereBySearchRequest<T>(this IQueryable<T> query, object searchRequest)
+        public static IQueryable<T> Where<T>(this IQueryable<T> query, SearchRequestBase searchRequest) where T : class
         {
             if (searchRequest == null)
                 return query;
 
             searchRequest.GetPropertiesWithSetValue()?.ForEach(x =>
             {
-                query = query.Where(BuildCondition(x));
+                query = query.Where(BuildCondition(x), string.Empty);
             });
 
             return query;
         }
 
-        public static IQueryable<T> IncludeBySearchRequest<T>(this IQueryable<T> query, object searchRequest) where T : class
+        public static IQueryable<T> Include<T>(this IQueryable<T> query, SearchRequestBase searchRequest) where T : class
         {
             if (searchRequest == null)
                 return query;
@@ -35,7 +35,7 @@ namespace HyperQL
             return query;
         }
 
-        public static IQueryable<T> OrderByExtension<T>(this IQueryable<T> query, List<OrderField> orderFields) where T : class
+        public static IQueryable<T> OrderBy<T>(this IQueryable<T> query, List<OrderField> orderFields) where T : class
         {
             if (orderFields == null || orderFields.Count == 0)
                 return query;
