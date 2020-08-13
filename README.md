@@ -1,2 +1,2 @@
 # HyperQL
-.Net Core package used for advanced manipulation on Entity Framework Core objects.
+.Net Core package used for manipulation on Entity Framework Core objects.
